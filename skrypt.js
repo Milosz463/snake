@@ -11,6 +11,7 @@ ruchP.style.display = "none";
  */
 function generujPlansze() {
   plansza.style.setProperty("--kolumny", kolumny);
+  //szerokosc 1 pola planszy
   plansza.style.setProperty("--rozmiar", szerokosc + "px");
 
   for (let i = 0; i < wiersze; i++) {
@@ -202,14 +203,13 @@ function GrajPonownie() {
   poprzedni = 43;
   wynik = 0;
   predkoscWeza = 400;
-  segmentyWeza[43]
-  
   // Reset całego węża na planszy
   segmentyWeza.forEach(seg => {
-    let blok = document.getElementById("box" + seg);
-    if (blok) blok.classList.remove("snake");
-  });
-  
+  let blok = document.getElementById("box" + seg);
+  if (blok) blok.classList.remove("snake");
+});
+  segmentyWeza=[]
+  segmentyWeza.push(43);
   resetujJedzenie();
   PokazWezaNaPoczatekGry();
   tick();
@@ -227,11 +227,10 @@ function GrajPonownie() {
  * Rozpoczyna grę i ustawia początkową pozycję węża oraz jedzenia
  */
 function startGry() {
-  
   if (auto) {
     clearInterval(auto);
   }
-  
+
   id = 43;
   poprzedni = 43;
   PokazWezaNaPoczatekGry();
@@ -245,5 +244,6 @@ function startGry() {
 }
 // Tworzenie planszy na starcie
 generujPlansze();
+
 
 //autor:Milosz Dawiec
