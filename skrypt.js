@@ -1,10 +1,14 @@
+// Ukrycie przycisków ruchu na początku gry
 ruchD.style.display = "none";
 ruchG.style.display = "none";
 ruchL.style.display = "none";
 ruchP.style.display = "none";
-/*
-ZROBIC POWIEKSZANIE WEZA PRZEZ DODAWANIE POZYCJI GLOWY DOD TABLICY I OSTATNIEGO ELEMETNU OGONA OD NIEGO KOLOROWAC DIVY
-*/
+
+/**
+ * generujPlansze
+ * Tworzy planszę do gry węża, ustawia kolory pól w szachownicę
+ * i przypisuje im unikalne ID.
+ */
 function generujPlansze() {
   plansza.style.setProperty("--kolumny", kolumny);
   plansza.style.setProperty("--rozmiar", szerokosc + "px");
@@ -13,8 +17,9 @@ function generujPlansze() {
     for (let j = 0; j < kolumny; j++) {
       let siatka = document.createElement("div");
       siatka.classList.add("box");
-      siatka.id = "box" + (i*kolumny+j);
+      siatka.id = "box" + (i*kolumny+j);// unikalny identyfikator pola
 
+     // Naprzemienne kolory pól szachownicy
       if ((i + j) % 2 === 0) {
         siatka.classList.add("jasne");
       } else {
@@ -27,6 +32,12 @@ function generujPlansze() {
   }
 }
 
+/**
+ * Funkcje sterowania wężem.
+ * Zmienia kierunek ruchu i rozpoczyna grę jeśli jeszcze się nie zaczęła.
+ * dirX to przesuniecie w lewo i prawo 
+ * dirY to przesuniecie w gore i dol
+ */
 function ruchWprawo() {
   dirX = 1;
   dirY = 0;
@@ -51,15 +62,15 @@ function ruchWgore() {
   czyZaczetoSieRuszac = true;
 }
 
-
-
-
-
+/**
+ * tick
+ * Główna pętla gry - porusza wężem, obsługuje jedzenie i kolizje.
+ */
 function tick() {
   auto = setInterval(function () {
-    if (!czyZaczetoSieRuszac) return;
+    if (!czyZaczetoSieRuszac) return;// gra się jeszcze nie rozpoczęła
 
-    aktualnaPozycjaGlowy();
+    aktualnaPozycjaGlowy();// oblicz aktualną kolumnę i wiersz głowy
 
     //pozycja głowy węża
     let x = kolumna + dirX;
@@ -73,6 +84,7 @@ function tick() {
       return;
     }
 
+// kolizja z własnym ciałem
     if(segmentyWeza.includes(nowySegment)){
       oknoPrzegranej.style.display = "block";
       podsumowanieWynik.textContent = "WYNIK: " + wynik;
@@ -134,24 +146,10 @@ if (blok) {
   }, predkoscWeza);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * PokazWezaNaPoczatekGry
+ * Ustawia początkową pozycję węża na planszy
+ */
 function PokazWezaNaPoczatekGry() {
   if (czyZaczetoSieRuszac == false) {
     document.getElementById("box" + 43).classList.add("snake");
@@ -159,16 +157,29 @@ function PokazWezaNaPoczatekGry() {
     document.getElementById("box" + 43).classList.add("ciemne");
   }
 }
+
+/**
+ * aktualnaPozycjaGlowy
+ * Oblicza kolumnę i wiersz głowy węża
+ */
 function aktualnaPozycjaGlowy() {
   kolumna = id % kolumny;
   wiersz = Math.floor(id / kolumny);
 }
 
+/**
+ * losujJedzenie
+ * Losuje pozycję jedzenia na planszy
+ */
 function losujJedzenie() {
   losowa = Math.floor(Math.random() * licznik);
   document.getElementById("box" + losowa).classList.add("jedzenie");
 }
 
+/**
+ * resetujJedzenie
+ * Usuwa wszystkie elementy klasy "jedzenie" z planszy
+ */
 function resetujJedzenie() {
   let wszystkiePola = document.querySelectorAll(".box");
   wszystkiePola.forEach((pole) => {
@@ -176,6 +187,10 @@ function resetujJedzenie() {
   });
 }
 
+/**
+ * GrajPonownie
+ * Resetuje grę po przegranej - wąż, ogon, wynik, predkosc i jedzenie
+ */
 function GrajPonownie() {
   oknoPrzegranej.style.display = "none";
   if (auto) clearInterval(auto);
@@ -188,10 +203,13 @@ function GrajPonownie() {
   wynik = 0;
   predkoscWeza = 400;
   segmentyWeza[43]
+  
+  // Reset całego węża na planszy
   segmentyWeza.forEach(seg => {
     let blok = document.getElementById("box" + seg);
     if (blok) blok.classList.remove("snake");
   });
+  
   resetujJedzenie();
   PokazWezaNaPoczatekGry();
   tick();
@@ -204,11 +222,16 @@ function GrajPonownie() {
   losujJedzenie();
 }
 
+/**
+ * startGry
+ * Rozpoczyna grę i ustawia początkową pozycję węża oraz jedzenia
+ */
 function startGry() {
+  
   if (auto) {
     clearInterval(auto);
   }
-
+  
   id = 43;
   poprzedni = 43;
   PokazWezaNaPoczatekGry();
@@ -220,5 +243,7 @@ function startGry() {
   przyciskGraj.style.display = "none";
   losujJedzenie();
 }
+// Tworzenie planszy na starcie
 generujPlansze();
+
 //autor:Milosz Dawiec
