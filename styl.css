@@ -1,0 +1,98 @@
+body {
+  background-color: #3f1f0e;
+}
+#lewo {
+  padding-left: 35%;
+  float: left;
+}
+#prawo {
+  padding-right: 35%;
+  float: right;
+}
+#gridPlansza {
+  position: relative;
+  display: grid;
+  z-index: 1;
+  grid-template-columns: repeat(var(--kolumny), var(--rozmiar));
+  clear: both;
+  padding: 30px 100px;
+  justify-content: center;
+}
+#oknoPrzegranej {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(63, 31, 14);
+  z-index: 10;
+  padding: 20px;
+  border-radius: 10px;
+}
+#przyciskGrajPonownie {
+  padding: 10px;
+  border-radius: 50%;
+  justify-content: center;
+  margin: 0 auto;
+  background: #5a3e2b;
+}
+.box {
+  width: var(--rozmiar);
+  height: var(--rozmiar);
+}
+#przyciski {
+  display: grid;
+  grid-template-columns: repeat(3);
+  grid-template-rows: repeat(3);
+  gap: 5px;
+  justify-content: center;
+  padding-top: 25px;
+  margin: 0 auto;
+}
+.g {
+  grid-column: 2;
+  grid-row: 1;
+}
+.l {
+  grid-column: 1;
+  grid-row: 2;
+}
+.p {
+  grid-column: 3;
+  grid-row: 2;
+}
+.d {
+  grid-column: 2;
+  grid-row: 3;
+}
+.g,
+.l,
+.p,
+.d {
+  padding: 10px;
+  border-radius: 50%;
+  background: #5a3e2b;
+}
+#przyciskGraj {
+  padding: 10px;
+  border-radius: 50%;
+  justify-content: center;
+  margin: 0 auto;
+  background: #5a3e2b;
+}
+.snake {
+  background-color: #b9a48a !important;
+}
+.box.jasne {
+  background-color: #5a3e2b;
+}
+
+.box.ciemne {
+  background-color: #4b3621;
+}
+.jedzenie {
+  background-color: green !important;
+}

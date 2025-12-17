@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="styl.css" />
+  </head>
+  <body>
+    <div id="header">
+      <div id="lewo">
+        <h3 id="wynik">WYNIK: 0</h3>
+        <h3>ŻYCIA:</h3>
+      </div>
+      <div id="prawo">
+        <h3>POZIOM:</h3>
+      </div>
+    </div>
+    <div id="gridPlansza"></div>
+    <div id="oknoPrzegranej">
+      <h3 id="podsumowanieWynik">WYNIK:</h3>
+      <h3 id="podsumowaniePoziom">POZIOM:</h3>
+      <button onclick="GrajPonownie()" id="przyciskGrajPonownie">
+        GRAJ PONOWNIE
+      </button>
+    </div>
+    <div id="przyciski">
+      <button class="g" id="ruchGora" onclick="ruchWgore()">GÓRA</button>
+      <button class="l" id="ruchLewo" onclick="ruchWlewo()">LEWO</button>
+      <button class="p" id="ruchPrawo" onclick="ruchWprawo()">PRAWO</button>
+      <button class="d" id="ruchDol" onclick="ruchWdol()">DÓŁ</button>
+      <button onclick="startGry()" id="przyciskGraj">GRAJ</button>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="skrypt.js"></script>
+  </body>
+</html>
