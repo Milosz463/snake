@@ -221,3 +221,4 @@ function startGry() {
   losujJedzenie();
 }
 generujPlansze();
+//autor:Milosz Dawiec
