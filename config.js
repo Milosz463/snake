@@ -21,3 +21,5 @@ let podsumowaniePoziom = document.getElementById("podsumowaniePoziom");
 let plansza = document.getElementById("gridPlansza");
 let wynikText = document.getElementById("wynik");
 let przyciskGraj = document.getElementById("przyciskGraj");
+
+//autor:Milosz Dawiec
